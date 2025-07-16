@@ -13,7 +13,7 @@ import {
 	Cell,
 } from 'recharts';
 
-import { DataItem, formatValue } from '../../utils/types'; // Adjusted import path
+import { DataItem, formatValue } from '@/utils/types'; // Adjusted import path
 import {
 	ChartsContainer,
 	NoDataMessage,

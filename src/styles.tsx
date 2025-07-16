@@ -51,3 +51,11 @@ export const SectionSeparator = styled.hr`
 	border: none;
 	border-top: 1px solid #e5e7eb;
 `;
+
+export const SectionTitle = styled.h2`
+	font-size: 1.75rem; /* text-2xl */
+	font-weight: 600; /* font-semibold */
+	color: #1f2937; /* text-gray-800 */
+	margin-bottom: 1.5rem;
+	text-align: center;
+`;

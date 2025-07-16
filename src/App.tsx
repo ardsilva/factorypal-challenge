@@ -1,9 +1,8 @@
 import { useEffect, useState, useCallback } from 'react';
-import { data as apiData } from './mocks/data.json'; // Adjust the path as necessary
-import { DataItem } from './utils/types'; // Adjusted import path
-import Charts from './components/Charts/Charts';
-import Table from './components/Table/Table';
-import styled from 'styled-components';
+import { data as apiData } from '@/mocks/data.json'; // Adjust the path as necessary
+import { DataItem } from '@/utils/types'; // Adjusted import path
+import Charts from '@/components/Charts/Charts';
+import Table from '@/components/Table/Table';
 import {
 	AppContainer,
 	ContentWrapper,
@@ -12,6 +11,7 @@ import {
 	LoadingState,
 	LoadingText,
 	SectionSeparator,
+	SectionTitle,
 } from './styles';
 
 const App = () => {
@@ -78,13 +78,5 @@ const App = () => {
 		</AppContainer>
 	);
 };
-
-const SectionTitle = styled.h2`
-	font-size: 1.75rem; /* text-2xl */
-	font-weight: 600; /* font-semibold */
-	color: #1f2937; /* text-gray-800 */
-	margin-bottom: 1.5rem;
-	text-align: center;
-`;
 
 export default App;

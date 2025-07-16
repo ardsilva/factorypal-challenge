@@ -1,5 +1,5 @@
 import { useState, useMemo, useEffect } from 'react';
-import { DataItem } from '../../utils/types';
+import { DataItem } from '@/utils/types';
 import {
 	TableContainer,
 	SearchInput,
