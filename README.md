@@ -1,69 +1,95 @@
-# React + TypeScript + Vite
+# FactoryPal Challenge
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+[![Author](https://img.shields.io/badge/author-ardsilva-blue.svg)](https://github.com/ardsilva)
+[![Built With](https://img.shields.io/badge/built%20with-React%20%26%20Vite-61dafb.svg)](https://react.dev)
+[![Language](https://img.shields.io/badge/language-TypeScript-blue.svg)](https://www.typescriptlang.org/)
 
-Currently, two official plugins are available:
+> **A coding challenge project built with React, Vite, and TypeScript.**
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Table of Contents
 
-## Expanding the ESLint configuration
+- [Overview](#overview)
+- [Features](#features)
+- [Tech Stack](#tech-stack)
+- [Getting Started](#getting-started)
+- [Scripts](#scripts)
+- [Project Structure](#project-structure)
+- [Author](#author)
+- [License](#license)
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+## Overview
 
-```js
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+This repository contains a solution to the FactoryPal coding challenge. The project leverages React and Vite to deliver a modern, fast, and maintainable frontend application, written entirely in TypeScript.
 
-      // Remove tseslint.configs.recommended and replace with this
-      ...tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      ...tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      ...tseslint.configs.stylisticTypeChecked,
+## Features
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+- Modern React application bootstrapped with Vite
+- Type-safe development using TypeScript
+- Modular and scalable project structure
+- Table and chart components for data visualization
+- Clean and maintainable codebase
+- Component-level styling
+
+## Tech Stack
+
+- **React**
+- **Vite**
+- **TypeScript**
+- **CSS/HTML**
+
+## Getting Started
+
+To run this project locally:
+
+1. **Clone the repository:**
+
+   ```bash
+   git clone https://github.com/ardsilva/factorypal-challenge.git
+   cd factorypal-challenge
+   ```
+
+2. **Install dependencies:**
+
+   ```bash
+   npm install
+   # or
+   yarn install
+   ```
+
+3. **Start the development server:**
+
+   ```bash
+   npm run dev
+   # or
+   yarn dev
+   ```
+
+4. Open your browser at [http://localhost:5173](http://localhost:5173) (default Vite port).
+
+## Scripts
+
+- `dev` — Run the app in development mode
+- `build` — Build the app for production
+- `preview` — Preview the production build locally
+
+## Project Structure
+
+```
+factorypal-challenge/
+├── src/
+│   ├── components/   # Reusable UI components (Table, Charts, etc.)
+│   ├── styles/       # CSS styles
+│   ├── utils/        # Utility and type helpers
+│   └── main.tsx      # App entry point
+├── public/           # Static assets
+├── package.json
+└── vite.config.ts
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+## Author
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+- [Alexandre Silva](https://github.com/ardsilva)
 
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+## License
+
+This project is for educational and evaluation purposes.
