@@ -35,7 +35,7 @@ This repository contains a solution to the FactoryPal coding challenge. The proj
 - **React**
 - **Vite**
 - **TypeScript**
-- **CSS/HTML**
+- **Styled-Components**
 
 ## Getting Started
 
@@ -77,12 +77,15 @@ To run this project locally:
 ```
 factorypal-challenge/
 ├── src/
-│   ├── components/   # Reusable UI components (Table, Charts, etc.)
-│   ├── styles/       # CSS styles
+│   ├── components/   # Reusable UI components (Table, Charts, CustomTooltip)
+│   │    │--- styles/ # CSS styles
+│   ├── mocks/        # Mocked data
 │   ├── utils/        # Utility and type helpers
+│   ├── test/         # Setup tests
 │   └── main.tsx      # App entry point
-├── public/           # Static assets
+├── public/           # Static assets (only vite.svg icon)
 ├── package.json
+├── vitest.config.ts
 └── vite.config.ts
 ```
 
