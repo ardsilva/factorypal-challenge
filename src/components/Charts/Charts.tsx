@@ -13,86 +13,25 @@ import {
 	Cell,
 } from 'recharts';
 
-import { DataItem, formatValue } from '@/utils/types'; // Adjusted import path
+import { DataItem, formatValue } from '@/utils/types';
 import {
 	ChartsContainer,
 	NoDataMessage,
 	ChartSection,
 	SectionTitle,
+	PIE_COLORS,
 } from './styles';
-
-// Custom Tooltip for Recharts
-const CustomTooltip = ({ active, payload, label }) => {
-	if (active && payload && payload.length) {
-		const item = payload[0].payload; // Get the original data item
-		// Handle specific formatting for shift pie chart data
-		if (item.originalType) {
-			// Check if it's our specially formatted shift data
-			return (
-				<div
-					style={{
-						backgroundColor: '#fff',
-						padding: '10px',
-						border: '1px solid #ccc',
-						borderRadius: '5px',
-						boxShadow: '0 2px 5px rgba(0,0,0,0.1)',
-					}}
-				>
-					<p className="label">{`${item.label}`}</p>
-					<p
-						className="intro"
-						style={{ color: payload[0].color }}
-					>
-						{`Value: ${formatValue(item.value, item.originalType)}`}
-					</p>
-				</div>
-			);
-		}
-		return (
-			<div
-				style={{
-					backgroundColor: '#fff',
-					padding: '10px',
-					border: '1px solid #ccc',
-					borderRadius: '5px',
-					boxShadow: '0 2px 5px rgba(0,0,0,0.1)',
-				}}
-			>
-				<p className="label">{`${item.label}`}</p>
-				<p
-					className="intro"
-					style={{ color: payload[0].color }}
-				>
-					{`Value: ${formatValue(item.value, item.type)}`}
-				</p>
-				<p className="desc">{item.description}</p>
-			</div>
-		);
-	}
-	return null;
-};
-
-// Colors for Pie Chart segments
-const PIE_COLORS = [
-	'#0088FE',
-	'#00C49F',
-	'#FFBB28',
-	'#FF8042',
-	'#A28DFF',
-	'#FF6B6B',
-];
+import CustomTooltip from '../CustomTooltip/CustomTooltip';
 
 interface ChartsProps {
 	data: DataItem[];
-	selectedData?: DataItem[]; // Optional prop for selected data from the table
+	selectedData?: DataItem[];
 }
 
 const Charts = ({ data, selectedData }: ChartsProps) => {
-	// Determine which data set to use: selectedData if available and not empty, otherwise all data
 	const dataToDisplay =
 		selectedData && selectedData.length > 0 ? selectedData : data;
 
-	// Group data by category for different charts
 	const categorizedData = useMemo(() => {
 		const categories: { [key: string]: DataItem[] } = {};
 		dataToDisplay.forEach((item) => {
@@ -104,7 +43,6 @@ const Charts = ({ data, selectedData }: ChartsProps) => {
 		return categories;
 	}, [dataToDisplay]);
 
-	// Prepare data for the 'shift' category pie chart
 	const shiftPieChartData = useMemo(() => {
 		const shiftItems = categorizedData['shift'];
 		if (!shiftItems || shiftItems.length === 0) return [];
@@ -114,9 +52,8 @@ const Charts = ({ data, selectedData }: ChartsProps) => {
 		const shiftDurationHours =
 			shiftItems.find((item) => item.id === 'shift_duration')?.value || 0;
 
-		const cleaningInHours = cleaningInSecs / 3600; // Convert seconds to hours
+		const cleaningInHours = cleaningInSecs / 3600;
 
-		// Ensure shiftDurationHours is positive and cleaningInHours doesn't exceed it
 		const actualShiftDuration = Math.max(0, shiftDurationHours);
 		const actualCleaningInHours = Math.min(
 			cleaningInHours,
@@ -130,18 +67,17 @@ const Charts = ({ data, selectedData }: ChartsProps) => {
 			pieData.push({
 				label: 'Cleaning Time',
 				value: actualCleaningInHours,
-				originalType: 'hours', // Custom property to help tooltip formatting
+				originalType: 'hours',
 			});
 		}
 		if (nonCleaningTimeInHours > 0) {
 			pieData.push({
 				label: 'Non-Cleaning Time',
 				value: nonCleaningTimeInHours,
-				originalType: 'hours', // Custom property to help tooltip formatting
+				originalType: 'hours',
 			});
 		}
 
-		// If total shift duration is 0 or no meaningful data, return empty
 		if (actualShiftDuration === 0 && pieData.length === 0) return [];
 
 		return pieData;
@@ -166,7 +102,6 @@ const Charts = ({ data, selectedData }: ChartsProps) => {
 					<SectionTitle>
 						{category.charAt(0).toUpperCase() + category.slice(1)} Data
 					</SectionTitle>
-					{/* Bar Chart for 'efficiency' and 'downtime' categories */}
 					{(category === 'efficiency' || category === 'downtime') && (
 						<ResponsiveContainer
 							width="100%"
@@ -179,7 +114,6 @@ const Charts = ({ data, selectedData }: ChartsProps) => {
 								<CartesianGrid strokeDasharray="3 3" />
 								<XAxis dataKey="label" />
 								<YAxis
-									// Format Y-axis ticks based on the type of the first item in the category
 									tickFormatter={(value) =>
 										formatValue(
 											value,
@@ -214,10 +148,10 @@ const Charts = ({ data, selectedData }: ChartsProps) => {
 									outerRadius={100}
 									fill="#8884d8"
 									label={({ label, percent }) =>
-										`${label} (${(percent * 100).toFixed(0)}%)`
+										`${label} (${(percent! * 100).toFixed(0)}%)`
 									}
 								>
-									{categorizedData[category].map((entry, index) => (
+									{categorizedData[category].map((_, index) => (
 										<Cell
 											key={`cell-${index}`}
 											fill={PIE_COLORS[index % PIE_COLORS.length]}
@@ -230,7 +164,6 @@ const Charts = ({ data, selectedData }: ChartsProps) => {
 						</ResponsiveContainer>
 					)}
 
-					{/* Pie Chart for 'shift' category (Cleaning vs Non-Cleaning Time) */}
 					{category === 'shift' && shiftPieChartData.length > 0 && (
 						<ResponsiveContainer
 							width="100%"
@@ -246,10 +179,10 @@ const Charts = ({ data, selectedData }: ChartsProps) => {
 									outerRadius={100}
 									fill="#8884d8"
 									label={({ label, percent }) =>
-										`${label} (${(percent * 100).toFixed(0)}%)`
+										`${label} (${(percent! * 100).toFixed(0)}%)`
 									}
 								>
-									{shiftPieChartData.map((entry, index) => (
+									{shiftPieChartData.map((_, index) => (
 										<Cell
 											key={`cell-${index}`}
 											fill={PIE_COLORS[index % PIE_COLORS.length]}

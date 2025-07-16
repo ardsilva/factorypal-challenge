@@ -32,3 +32,13 @@ export const NoDataMessage = styled.p`
 	font-size: 1.1rem;
 	padding: 2rem;
 `;
+
+// Colors for Pie Chart segments
+export const PIE_COLORS = [
+	'#0088FE',
+	'#00C49F',
+	'#FFBB28',
+	'#FF8042',
+	'#A28DFF',
+	'#FF6B6B',
+];

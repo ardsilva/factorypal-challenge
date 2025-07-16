@@ -1,6 +1,6 @@
 import { useEffect, useState, useCallback } from 'react';
-import { data as apiData } from '@/mocks/data.json'; // Adjust the path as necessary
-import { DataItem } from '@/utils/types'; // Adjusted import path
+import { data as apiData } from '@/mocks/data.json';
+import { DataItem } from '@/utils/types';
 import Charts from '@/components/Charts/Charts';
 import Table from '@/components/Table/Table';
 import {
@@ -35,7 +35,6 @@ const App = () => {
 		getData();
 	}, []);
 
-	// Callback to receive selected items from the Table component
 	const handleTableSelectionChange = useCallback((items: DataItem[]) => {
 		setSelectedTableItems(items);
 	}, []);
@@ -56,7 +55,6 @@ const App = () => {
 					</LoadingState>
 				) : (
 					<>
-						{/* Table Section */}
 						<SectionTitle>Data Table</SectionTitle>
 						<Table
 							data={data}
@@ -65,9 +63,7 @@ const App = () => {
 
 						<SectionSeparator />
 
-						{/* Charts Section */}
 						<SectionTitle>Data Charts</SectionTitle>
-						{/* Pass the selectedTableItems to the Charts component */}
 						<Charts
 							data={data}
 							selectedData={selectedTableItems}
