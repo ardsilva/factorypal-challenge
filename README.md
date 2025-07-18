@@ -6,6 +6,10 @@
 
 > **A coding challenge project built with React, Vite, and TypeScript.**
 
+## Demo 🖥️
+[Live Code](https://ardsilva-factorypal-challenge.vercel.app)
+
+
 ## Table of Contents
 
 - [Overview](#overview)
