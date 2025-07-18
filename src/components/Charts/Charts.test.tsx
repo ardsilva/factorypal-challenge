@@ -1,12 +1,20 @@
 import { render, screen } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import Charts from './Charts';
+import { DataItemType } from '@/utils/types';
+
+const DataItemType = {
+	Percentage: 'Percentage' as DataItemType,
+	Minutes: 'Minutes' as DataItemType,
+	Seconds: 'Seconds' as DataItemType,
+	Hours: 'Hours' as DataItemType,
+};
 
 const mockData = [
 	{
 		id: '1',
 		category: 'efficiency',
-		type: 'percent',
+		type: DataItemType.Percentage,
 		label: 'OEE',
 		value: 91.2,
 		description: 'Overall Equipment Effectiveness',
@@ -14,7 +22,7 @@ const mockData = [
 	{
 		id: '2',
 		category: 'downtime',
-		type: 'minutes',
+		type: DataItemType.Minutes,
 		label: 'Stop 1',
 		value: 10,
 		description: 'Minor stop',
@@ -22,7 +30,7 @@ const mockData = [
 	{
 		id: 'cln_shift',
 		category: 'shift',
-		type: 'seconds',
+		type: DataItemType.Seconds,
 		label: 'Cleaning',
 		value: 7200,
 		description: 'Cleaning operation',
@@ -30,7 +38,7 @@ const mockData = [
 	{
 		id: 'shift_duration',
 		category: 'shift',
-		type: 'hours',
+		type: DataItemType.Hours,
 		label: 'Shift Duration',
 		value: 8,
 		description: 'Shift duration',
@@ -45,7 +53,6 @@ it('renders no data message if data is empty', () => {
 });
 
 it('renders chart sections for each category', () => {
-	const fn = vi.fn();
 	render(<Charts data={mockData} />);
 	expect(screen.getByText(/Efficiency Data/i)).toBeInTheDocument();
 	expect(screen.getByText(/Downtime Data/i)).toBeInTheDocument();

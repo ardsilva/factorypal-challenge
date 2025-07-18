@@ -3,11 +3,20 @@ import '@testing-library/jest-dom';
 import { vi } from 'vitest';
 import Table from './Table';
 
+import { DataItemType } from '@/utils/types';
+
+const DataItemType = {
+	Percentage: 'Percentage' as DataItemType,
+	Minutes: 'Minutes' as DataItemType,
+	Seconds: 'Seconds' as DataItemType,
+	Hours: 'Hours' as DataItemType,
+};
+
 const mockData = [
 	{
 		id: '1',
 		category: 'efficiency',
-		type: 'percent',
+		type: DataItemType.Percentage,
 		label: 'OEE',
 		value: 91.2,
 		description: 'Overall Equipment Effectiveness',
@@ -15,7 +24,7 @@ const mockData = [
 	{
 		id: '2',
 		category: 'downtime',
-		type: 'minutes',
+		type: DataItemType.Minutes,
 		label: 'Stop 1',
 		value: 10,
 		description: 'Minor stop',

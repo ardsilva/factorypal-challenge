@@ -1,4 +1,4 @@
-type DataItemType = 'number' | 'percentage' | 'secs' | 'hours';
+export type DataItemType = 'number' | 'percentage' | 'secs' | 'hours';
 
 export interface DataItem {
 	id: string;
